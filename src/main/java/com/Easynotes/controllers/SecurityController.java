@@ -35,7 +35,8 @@ public class SecurityController {
     private RegistrationService service;
 
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
         try{
             authenticationManager.authenticate(

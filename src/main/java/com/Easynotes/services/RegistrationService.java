@@ -31,6 +31,7 @@ public class RegistrationService {
         if(repository.findByEmail(user.getEmail()).isPresent()){
             return new ResponseEntity<>("user already exist", HttpStatus.BAD_REQUEST);
         }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         repository.save(user);
         return new ResponseEntity<>("user added", HttpStatus.CREATED);
     }
