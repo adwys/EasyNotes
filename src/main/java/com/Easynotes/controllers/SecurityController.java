@@ -3,6 +3,8 @@ package com.Easynotes.controllers;
 
 import com.Easynotes.models.AuthenticationRequest;
 import com.Easynotes.models.AuthenticationResponse;
+import com.Easynotes.models.RegisterRequest;
+import com.Easynotes.services.RegistrationService;
 import com.Easynotes.services.UserDetailsServices;
 import com.Easynotes.utilis.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class SecurityController {
     @Autowired
     private JwtUtil jwtToken;
 
+    @Autowired
+    private RegistrationService service;
+
+
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
         try{
@@ -47,4 +53,10 @@ public class SecurityController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
     }
+
+    @RequestMapping(value = "/auth/register",method = RequestMethod.POST)
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request){
+        return service.register(request);
+    }
+
 }
